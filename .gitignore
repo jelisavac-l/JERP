@@ -4,3 +4,8 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea
+.idea/
+*.DotSettings
+*.DotSettings.user
+_ReSharper*/
+*.sln.iml
