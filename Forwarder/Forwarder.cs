@@ -36,17 +36,24 @@ public class Forwarder
             // Use StreamContent to avoid loading entire request into memory.
             requestMessage.Content = new StreamContent(context.Request.Body);
         }
-        
-        Console.WriteLine($"Request message: {requestMessage}");
-        
-        Console.WriteLine("Waiting for response...");
+
+        HttpResponseMessage responseMessage;
         
         // Send request
-        var responseMessage = await _httpClient.SendAsync(
-            requestMessage,
-            HttpCompletionOption.ResponseHeadersRead,
-            context.RequestAborted
-        );
+        try
+        {
+            responseMessage = await _httpClient.SendAsync(
+                requestMessage,
+                HttpCompletionOption.ResponseHeadersRead,
+                context.RequestAborted
+            );
+        }
+        catch (Exception e)
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync(e.Message);
+            return;
+        }
         
         Console.WriteLine($"Response received. Status code: {responseMessage.StatusCode}");
         
