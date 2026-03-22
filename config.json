@@ -1,0 +1,41 @@
+{
+  "serverName": "JERP Example Config",
+  "services": [
+    {
+      "Name": "users-service",
+      "path": "/api/users",
+      "loadBalancingPolicy": "round_robin",
+      "stripPrefix": true,
+      "retries": 1,
+      "timeout": 5,
+      "instances": [
+        {
+          "url": "http://localhost:5001",
+          "healthCheckPath": "/health"
+        }
+      ]
+    },
+    {
+      "Name": "product-service",
+      "path": "/api/products",
+      "loadBalancingPolicy": "round_robin",
+      "stripPrefix": true,
+      "retries": 3,
+      "timeout": 12,
+      "instances": [
+        {
+          "url": "http://localhost:5002",
+          "healthCheckPath": "/health"
+        },
+        {
+          "url": "http://localhost:5003",
+          "healthCheckPath": "/health"
+        },
+        {
+          "url": "http://localhost:5004",
+          "healthCheckPath": "/health"
+        }
+      ]
+    }
+  ]
+}
