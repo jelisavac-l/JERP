@@ -3,7 +3,7 @@ using NNTReverseProxy.Model;
 
 namespace NNTReverseProxy.Configuration;
 
-public class JerpConfigurationLoader
+public static class JerpConfigurationLoader
 {
     public static JerpGateway Load(string path)
     {
@@ -20,25 +20,37 @@ public class JerpConfigurationLoader
             });
 
         if (config == null)
-            throw new Exception("Failed to deserialize config");
+            throw new Exception("Failed to deserialize config. Check config file.");
 
-        Validate(config);
+        ValidateGateway(config);
 
         return config;
     }
     
-    private static void Validate(JerpGateway config)
+    private static void ValidateGateway(JerpGateway config)
     {
         if (config.Services.Count == 0)
             throw new Exception("No services defined");
 
         foreach (var s in config.Services)
         {
-            if (s.Instances.Count == 0)
-                throw new Exception($"Service '{s.Name}' has no destinations");
-
-            if (!s.Path.StartsWith("/"))
-                throw new Exception($"Service '{s.Name}' path must start with '/'");
+            ValidateService(s);
         }
+    }
+
+    private static void ValidateService(JerpService service)
+    {
+        if (service.Instances.Count == 0)
+            throw new Exception($"Service '{service.Name}' has no instances defined.");
+        
+        if (!service.Path.StartsWith('/'))
+            throw new Exception($"Service '{service.Name}' path must start with '/'");
+
+        if (service.LoadBalancingPolicy != null &&
+            !JerpService.LoadBalancingPolicies.Contains(service.LoadBalancingPolicy))
+        {
+            throw new Exception($"Service {service.Name} doesn't have a valid LoadBalancingPolicy defined.");
+        }
+        
     }
 }
