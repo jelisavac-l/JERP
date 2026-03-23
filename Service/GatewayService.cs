@@ -56,6 +56,13 @@ public class GatewayService
             if (string.IsNullOrEmpty(context.Request.Path))
                 context.Request.Path = "/";
         }
+        
+        // Append custom headers
+        if (service.AddHeaders != null)
+            foreach (var header in service.AddHeaders)
+            {
+                context.Request.Headers.Append(header.Key, header.Value);
+            }
 
         await _forwarder.Forward(context, destination);
         

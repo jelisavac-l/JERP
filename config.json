@@ -10,10 +10,14 @@
       "timeout": 5,
       "instances": [
         {
-          "url": "http://localhost:5001",
+          "url": "http://localhost:8081",
           "healthCheckPath": "/health"
         }
-      ]
+      ],
+      "addHeaders": {
+        "X-Some-Header": "Hello",
+        "X-Some-Other-Header": "World"
+      }
     },
     {
       "Name": "product-service",
@@ -24,15 +28,15 @@
       "timeout": 12,
       "instances": [
         {
-          "url": "http://localhost:5002",
+          "url": "http://localhost:8082",
           "healthCheckPath": "/health"
         },
         {
-          "url": "http://localhost:5003",
+          "url": "http://localhost:8083",
           "healthCheckPath": "/health"
         },
         {
-          "url": "http://localhost:5004",
+          "url": "http://localhost:8084",
           "healthCheckPath": "/health"
         }
       ]
