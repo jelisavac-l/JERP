@@ -9,3 +9,4 @@ riderModule.iml
 *.DotSettings.user
 _ReSharper*/
 *.sln.iml
+/TestAPI/
