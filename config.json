@@ -4,7 +4,7 @@
     {
       "Name": "users-service",
       "path": "/api/users",
-      "loadBalancingPolicy": "round_robin",
+      "loadBalancingPolicy": "rr",
       "stripPrefix": true,
       "retries": 1,
       "timeout": 5,
@@ -18,7 +18,7 @@
     {
       "Name": "product-service",
       "path": "/api/products",
-      "loadBalancingPolicy": "round_robin",
+      "loadBalancingPolicy": "rr",
       "stripPrefix": true,
       "retries": 3,
       "timeout": 12,
