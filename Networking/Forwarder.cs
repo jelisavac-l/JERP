@@ -1,4 +1,4 @@
-namespace NNTReverseProxy.Forwarder;
+namespace NNTReverseProxy.Networking;
 
 public class Forwarder
 {
