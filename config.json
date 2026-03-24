@@ -25,7 +25,7 @@
       "loadBalancingPolicy": "rr",
       "stripPrefix": true,
       "retries": 3,
-      "timeout": 12,
+      "timeout": 30,
       "instances": [
         {
           "url": "http://localhost:8082",
@@ -33,10 +33,6 @@
         },
         {
           "url": "http://localhost:8083",
-          "healthCheckPath": "/health"
-        },
-        {
-          "url": "http://localhost:8084",
           "healthCheckPath": "/health"
         }
       ]

@@ -11,7 +11,7 @@ public class JerpGateway
         Console.WriteLine("-----------------------------------------------------------------");
         foreach (var service in Services)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"\n~ {service.Name}");
             Console.ResetColor();
             

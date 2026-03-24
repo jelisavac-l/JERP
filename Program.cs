@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<Forwarder>();
 builder.Services.AddSingleton<GatewayService>();
+builder.Services.AddHostedService<HealthCheckService>();
 
 var config = JerpConfigurationLoader.Load("config.json");
 builder.Services.AddSingleton(config);
