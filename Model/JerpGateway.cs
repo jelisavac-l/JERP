@@ -16,7 +16,7 @@ public class JerpGateway
             Console.ResetColor();
             
             Console.WriteLine($"  Path: {service.Path}");
-            Console.WriteLine($"  Load Balancer: {service.LoadBalancingPolicy}");
+            Console.WriteLine($"  Load Balancer: {service.LoadBalancer.ToString()}");
             
             Console.WriteLine($"  Strip prefix: {service.StripPrefix}");
             Console.WriteLine($"  Retries: {service.Retries}");

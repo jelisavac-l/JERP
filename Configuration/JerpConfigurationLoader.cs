@@ -1,4 +1,5 @@
 using System.Text.Json;
+using NNTReverseProxy.LoadBalancer;
 using NNTReverseProxy.Model;
 
 namespace NNTReverseProxy.Configuration;
@@ -23,6 +24,11 @@ public static class JerpConfigurationLoader
             throw new Exception("Failed to deserialize config. Check config file.");
 
         ValidateGateway(config);
+
+        foreach (var service in config.Services)
+        {
+            service.LoadBalancer = LoadBalancerFactory.Create(service.LoadBalancingPolicy);
+        }
 
         return config;
     }
