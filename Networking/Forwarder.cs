@@ -31,6 +31,8 @@ public class Forwarder
             }
         }
         
+        requestMessage.Headers.Add("X-Gateway", "JERP");
+        
         if (context.Request.ContentLength > 0 || context.Request.Body.CanRead)
         {
             // Use StreamContent to avoid loading entire request into memory.
