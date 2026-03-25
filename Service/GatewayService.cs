@@ -26,8 +26,8 @@ public class GatewayService
     
     private string PickDestination(JerpService service)
     {
-        // TODO: later replace with load balancer
-        return service.Instances[0].Url;
+        // TODO: Refactor this!
+        return service.LoadBalancer.ChooseInstance(service).Url;
     }
     
     public async Task HandleRequest(HttpContext context)

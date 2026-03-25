@@ -15,17 +15,21 @@ public class HealthCheckService : BackgroundService
 
     public async Task<bool> IsInstanceHealthy(JerpInstance instance)
     {
+        var healthCheckUrl = instance.Url + instance.HealthCheckPath;
+
         try
         {
-            var healthCheckUrl = instance.Url + instance.HealthCheckPath;
             var response = await _httpClient.GetAsync(healthCheckUrl);
             return response.IsSuccessStatusCode;
+        }
+        catch (HttpRequestException e)
+        {
+            return false;
         }
         catch (Exception e)
         {
             return false;
         }
-        
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
