@@ -54,7 +54,7 @@ public class Forwarder
         {
             context.Response.StatusCode = 500;
             await context.Response.WriteAsync(e.Message);
-            return;
+            throw;
         }
         
         Console.WriteLine($"Response received. Status code: {responseMessage.StatusCode}");

@@ -64,7 +64,16 @@ public class GatewayService
                 context.Request.Headers.Append(header.Key, header.Value);
             }
 
-        await _forwarder.Forward(context, destination);
+        try
+        {
+            await _forwarder.Forward(context, destination);
+        }
+        catch (Exception e)
+        {
+            // TODO: This just fails service, make something that will retry the request..
+            service.Instances.First(i => i.Url.Equals(destination)).IsHealthy = false;
+        }
+        
         
     }
 }
