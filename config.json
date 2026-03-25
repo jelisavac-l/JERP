@@ -2,7 +2,7 @@
   "serverName": "JERP Example Config",
   "services": [
     {
-      "Name": "users-service",
+      "name": "users-service",
       "path": "/api/users",
       "loadBalancingPolicy": "rr",
       "stripPrefix": true,
@@ -20,7 +20,7 @@
       }
     },
     {
-      "Name": "product-service",
+      "name": "product-service",
       "path": "/api/products",
       "loadBalancingPolicy": "rr",
       "stripPrefix": true,

@@ -4,7 +4,10 @@ namespace NNTReverseProxy.LoadBalancer;
 
 public class RandomLoadBalancer : ILoadBalancer
 {
-    public string Topic => nameof(RoundRobinLoadBalancer);
+    public override string ToString()
+    {
+        return nameof(RoundRobinLoadBalancer);
+    }
     
     private readonly Random _random =  new Random();
     
