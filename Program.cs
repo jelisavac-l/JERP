@@ -1,4 +1,5 @@
 using NNTReverseProxy.Configuration;
+using NNTReverseProxy.Model;
 using NNTReverseProxy.Networking;
 using NNTReverseProxy.Service;
 
@@ -19,7 +20,18 @@ builder.Services.AddSingleton<Forwarder>();
 builder.Services.AddSingleton<GatewayService>();
 builder.Services.AddHostedService<HealthCheckService>();
 
-var config = JerpConfigurationLoader.Load("config.json");
+JerpGateway config;
+
+try
+{
+    config = JerpConfigurationLoader.Load("config.json");
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+    return;
+}
+
 builder.Services.AddSingleton(config);
 
 var app = builder.Build();
