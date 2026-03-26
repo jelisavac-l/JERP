@@ -6,7 +6,7 @@ public class IpHashingLoadBalancer : ILoadBalancer
 {
     public override string ToString()
     {
-        return nameof(RoundRobinLoadBalancer);
+        return nameof(IpHashingLoadBalancer);
     }
     
     public JerpInstance ChooseInstance(JerpService service)

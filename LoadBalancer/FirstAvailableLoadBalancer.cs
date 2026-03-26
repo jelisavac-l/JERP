@@ -6,7 +6,7 @@ public class FirstAvailableLoadBalancer : ILoadBalancer
 {
     public override string ToString()
     {
-        return nameof(RoundRobinLoadBalancer);
+        return nameof(FirstAvailableLoadBalancer);
     }
     
     public JerpInstance ChooseInstance(JerpService service)

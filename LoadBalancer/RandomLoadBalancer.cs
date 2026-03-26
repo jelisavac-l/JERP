@@ -6,7 +6,7 @@ public class RandomLoadBalancer : ILoadBalancer
 {
     public override string ToString()
     {
-        return nameof(RoundRobinLoadBalancer);
+        return nameof(RandomLoadBalancer);
     }
     
     private readonly Random _random =  new Random();

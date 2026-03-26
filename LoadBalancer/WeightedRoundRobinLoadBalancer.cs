@@ -6,7 +6,7 @@ public class WeightedRoundRobinLoadBalancer : ILoadBalancer
 {
     public override string ToString()
     {
-        return nameof(RoundRobinLoadBalancer);
+        return nameof(WeightedRoundRobinLoadBalancer);
     }
     
     public JerpInstance ChooseInstance(JerpService service)
