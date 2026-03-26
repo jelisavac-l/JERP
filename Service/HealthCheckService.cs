@@ -6,11 +6,13 @@ public class HealthCheckService : BackgroundService
 {
     private readonly HttpClient _httpClient;
     private readonly JerpGateway _config;
+    private readonly ILogger<GatewayService> _logger;
 
-    public HealthCheckService(HttpClient httpClient, JerpGateway config)
+    public HealthCheckService(HttpClient httpClient, JerpGateway config, ILogger<GatewayService> logger)
     {
         _httpClient = httpClient;
         _config = config;
+        _logger = logger;
     }
 
     public async Task<bool> IsInstanceHealthy(JerpInstance instance)
@@ -49,7 +51,13 @@ public class HealthCheckService : BackgroundService
                     _ = Task.Run(async () =>
                     {
                         instance.IsHealthy = await IsInstanceHealthy(instance);
-                        Console.WriteLine($"Service {service.Name}'s instance {instance.Url} is healthy: {instance.IsHealthy}");
+                        if (!instance.IsHealthy)
+                            _logger.LogWarning(
+                                "Instance {Instance} of {Service} is {Status}",
+                                instance.Url,
+                                service.Name,
+                                instance.IsHealthy ? "HEALTHY" : "UNHEALTHY"
+                            );
                     }, stoppingToken);
                 }
             }

@@ -5,6 +5,16 @@ using NNTReverseProxy.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient();
+builder.Logging.ClearProviders();
+
+builder.Logging.AddSimpleConsole(options =>
+{
+    options.SingleLine = true;
+    options.TimestampFormat = "HH:mm:ss ";
+    options.UseUtcTimestamp = false;
+
+});
+
 builder.Services.AddSingleton<Forwarder>();
 builder.Services.AddSingleton<GatewayService>();
 builder.Services.AddHostedService<HealthCheckService>();

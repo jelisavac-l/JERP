@@ -3,16 +3,23 @@ namespace NNTReverseProxy.Networking;
 public class Forwarder
 {
     private readonly HttpClient _httpClient;
+    private readonly ILogger<Forwarder> _logger;
     
-    public Forwarder(IHttpClientFactory factory)
+    public Forwarder(IHttpClientFactory factory, ILogger<Forwarder> logger)
     {
+        _logger = logger;
         _httpClient = factory.CreateClient();
     }
     
     public async Task Forward(HttpContext context, string destination)
     {
         
-        Console.WriteLine($"Forwarding {context.Request.Path} to {destination}");
+        _logger.LogInformation(
+            "→ {Method} {Path} → {Destination}",
+            context.Request.Method,
+            context.Request.Path,
+            destination
+        );
         
         var targetUri = destination + context.Request.Path.Value + context.Request.QueryString.Value;
         
@@ -56,8 +63,6 @@ public class Forwarder
             await context.Response.WriteAsync(e.Message);
             throw;
         }
-        
-        Console.WriteLine($"Response received. Status code: {responseMessage.StatusCode}");
         
         foreach (var header in responseMessage.Headers)
         {
