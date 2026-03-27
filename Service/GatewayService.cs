@@ -70,6 +70,7 @@ public class GatewayService
         }
         catch (Exception e)
         {
+            _logger.LogError("Request to {Destination} failed: {Error}", destination, e.Message);
             // TODO: This just fails service, make something that will retry the request..
             service.Instances.First(i => i.Url.Equals(destination)).IsHealthy = false;
         }

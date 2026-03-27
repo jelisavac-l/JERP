@@ -26,10 +26,12 @@ public class HealthCheckService : BackgroundService
         }
         catch (HttpRequestException e)
         {
+            _logger.LogWarning("Healthcheck request failed: {Message}", e.Message);
             return false;
         }
         catch (Exception e)
         {
+            _logger.LogWarning("Healthcheck failed: {Message}", e.Message);
             return false;
         }
     }
