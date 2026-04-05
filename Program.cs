@@ -42,7 +42,7 @@ const string version = "0.0.1-alpha";
 Console.WriteLine($"""
                       / \__
                      (    @\___         🐾 JERP {version}
-                     /         O        Rutting @ {host}
+                     /         O        Running @ {host}
                     /   (_____/
                    /_____/   
                    """);
